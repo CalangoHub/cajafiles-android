@@ -4,19 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#bce0f8">
-  <title>Caja Mobile - Gerenciador de Arquivos para Android</title>
+  <title>CalangoHub Apps - Vitrine de Aplicativos Android</title>
   <style>
     :root {
-      --primary: #3b82c4;
-      --primary-dark: #22598c;
-      --primary-light: #5ba2e6;
-      --sky-100: #f4f9fd;
-      --sky-200: #e2f1fc;
-      --sky-300: #cfe7fa;
-      --sky-400: #b5daf5;
-      --border: #a4cde8;
-      --text-dark: #163653;
-      --text-muted: #587997;
+      --primary: #2d7cbd;
+      --primary-dark: #1b4f7a;
+      --primary-light: #52a2e4;
+      --sky-50: #f7fbff;
+      --sky-100: #eef6fd;
+      --sky-200: #d8ecfb;
+      --sky-300: #bce0f8;
+      --sky-400: #9cd0f5;
+      --border: #a4ceea;
+      --text-main: #14324f;
+      --text-muted: #4e7191;
+      --card-bg: #ffffff;
+      --badge-bg: #e1f1fc;
     }
 
     * {
@@ -27,20 +30,21 @@
     }
 
     body {
-      background: linear-gradient(180deg, #dcf0fd 0%, #edf6fd 40%, #ffffff 100%);
-      color: var(--text-dark);
+      background: linear-gradient(180deg, #dcf0fd 0%, #edf6fd 30%, #ffffff 100%);
+      color: var(--text-main);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
+    /* Topo do Site */
     header {
       width: 100%;
       background: linear-gradient(180deg, #cfe8fa 0%, #badff8 100%);
       border-bottom: 1px solid var(--border);
-      box-shadow: 0 2px 8px rgba(34, 89, 140, 0.08);
-      padding: 16px 24px;
+      box-shadow: 0 2px 8px rgba(27, 79, 122, 0.08);
+      padding: 14px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -49,21 +53,32 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 20px;
-      font-weight: 700;
+      gap: 10px;
+      font-size: 19px;
+      font-weight: 800;
       color: var(--primary-dark);
       text-decoration: none;
     }
 
     .brand svg {
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
     }
 
+    .top-badge {
+      font-size: 12px;
+      color: var(--primary-dark);
+      font-weight: 700;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 4px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    /* Hero Principal */
     .hero {
-      max-width: 860px;
-      width: 90%;
+      max-width: 980px;
+      width: 92%;
       margin: 40px auto 20px auto;
       text-align: center;
       display: flex;
@@ -71,191 +86,236 @@
       align-items: center;
     }
 
-    .badge-pill {
-      background: #cce7fa;
+    .pill-highlight {
+      background: #cbe6fa;
       color: var(--primary-dark);
       font-size: 13px;
-      font-weight: 600;
-      padding: 6px 16px;
+      font-weight: 700;
+      padding: 6px 18px;
       border-radius: 20px;
       border: 1px solid var(--border);
       display: inline-block;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     h1 {
       font-size: 38px;
       font-weight: 800;
       color: var(--primary-dark);
-      line-height: 1.2;
-      margin-bottom: 16px;
+      line-height: 1.25;
+      margin-bottom: 14px;
     }
 
     p.subtitle {
-      font-size: 18px;
+      font-size: 17px;
       color: var(--text-muted);
       line-height: 1.5;
-      max-width: 680px;
-      margin-bottom: 32px;
-    }
-
-    .cta-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
+      max-width: 720px;
       margin-bottom: 40px;
     }
 
-    .btn-download-apk {
-      display: inline-flex;
+    /* Grade da Vitrine de Aplicativos */
+    .apps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 26px;
+      width: 100%;
+      max-width: 980px;
+      margin-bottom: 50px;
+    }
+
+    .app-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(27, 79, 122, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-align: left;
+    }
+
+    .app-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(27, 79, 122, 0.16);
+    }
+
+    .card-top {
+      background: linear-gradient(180deg, #dcf0fd 0%, #c8e5fb 100%);
+      padding: 18px 20px;
+      display: flex;
       align-items: center;
-      gap: 12px;
-      background: linear-gradient(180deg, #4da4ea 0%, #2977bd 100%);
-      color: #ffffff;
-      font-size: 18px;
-      font-weight: 700;
-      padding: 16px 36px;
+      gap: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .app-icon {
+      width: 58px;
+      height: 58px;
+      background: #ffffff;
       border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(27, 79, 122, 0.12);
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+
+    .app-icon svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .app-headline {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .app-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .card-body {
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .app-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .badges-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .badge-item {
+      background: var(--badge-bg);
+      color: var(--primary-dark);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .card-footer {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-download {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: linear-gradient(180deg, #4da4ea 0%, #2574ba 100%);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 13px 20px;
+      border-radius: 12px;
       text-decoration: none;
-      box-shadow: 0 8px 24px rgba(41, 119, 189, 0.35);
+      box-shadow: 0 4px 14px rgba(37, 116, 186, 0.3);
       border: 1px solid #1f64a1;
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
     }
 
-    .btn-download-apk:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(41, 119, 189, 0.45);
-      background: linear-gradient(180deg, #5ab0f5 0%, #2e83ce 100%);
+    .btn-download:hover {
+      background: linear-gradient(180deg, #5ab0f5 0%, #2b82d0 100%);
+      transform: translateY(-1px);
     }
 
-    .btn-download-apk:active {
+    .btn-download:active {
       transform: translateY(1px);
     }
 
-    .download-meta {
-      font-size: 13px;
+    .file-meta-info {
+      font-size: 12px;
       color: var(--text-muted);
       font-weight: 500;
     }
 
-    /* Vitrine do Aplicativo */
-    .app-preview-card {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      box-shadow: 0 16px 40px rgba(34, 89, 140, 0.12);
-      max-width: 720px;
-      width: 100%;
-      overflow: hidden;
-      margin-bottom: 60px;
-    }
-
-    .preview-header {
-      background: linear-gradient(180deg, #d8ebfa 0%, #bde0f7 100%);
-      padding: 12px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .preview-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--primary-dark);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .preview-body {
-      padding: 24px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      text-align: left;
-    }
-
-    .feature-item {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    .feature-icon {
-      background: #e4f2fb;
-      border: 1px solid var(--border);
-      color: var(--primary);
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .feature-text h3 {
-      font-size: 16px;
-      font-weight: 700;
-      margin-bottom: 4px;
-      color: var(--text-dark);
-    }
-
-    .feature-text p {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
     /* Como Instalar */
-    .install-guide {
-      max-width: 720px;
+    .install-box {
+      max-width: 980px;
       width: 100%;
       background: #f7fbff;
       border: 1px dashed var(--border);
-      border-radius: 16px;
-      padding: 24px;
+      border-radius: 18px;
+      padding: 26px 24px;
       margin-bottom: 60px;
       text-align: left;
     }
 
-    .install-guide h2 {
-      font-size: 18px;
+    .install-box h2 {
+      font-size: 19px;
       color: var(--primary-dark);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       text-align: center;
     }
 
-    .install-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--text-dark);
+    .steps-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
     }
 
-    .step {
+    .step-card {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       gap: 12px;
+      background: #ffffff;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
     }
 
     .step-num {
       background: var(--primary);
-      color: #fff;
-      font-weight: 700;
-      width: 24px;
-      height: 24px;
+      color: #ffffff;
+      font-weight: 800;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12px;
+      font-size: 13px;
       flex-shrink: 0;
     }
 
+    .step-text {
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--text-main);
+    }
+
+    /* Rodape */
     footer {
       width: 100%;
       padding: 24px;
@@ -270,125 +330,152 @@
     footer a {
       color: var(--primary);
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
     }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 28px; }
+    @media (max-width: 700px) {
+      h1 { font-size: 27px; }
       p.subtitle { font-size: 15px; }
-      .btn-download-apk { width: 100%; justify-content: center; padding: 14px 20px; font-size: 16px; }
+      .apps-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Topo -->
   <header>
     <a href="#" class="brand">
-      <svg viewBox="0 0 24 24" fill="#2977bd">
-        <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+      <svg viewBox="0 0 24 24" fill="#2574ba">
+        <path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/>
       </svg>
-      <span>Caja Mobile</span>
+      <span>CalangoHub</span>
     </a>
-    <span style="font-size: 13px; color: var(--text-muted); font-weight: 600;">v1.0.0 Android</span>
+    <span class="top-badge">Central de Aplicativos</span>
   </header>
 
+  <!-- Hero -->
   <main class="hero">
-    <div class="badge-pill">Nostalgia & Produtividade no Android</div>
-    <h1>O Gerenciador de Arquivos Clássico no seu Celular</h1>
+    <div class="pill-highlight">Aplicativos Android Nativos & Livres</div>
+    <h1>Vitrine de Aplicativos do CalangoHub</h1>
     <p class="subtitle">
-      Inspirado na clássica interface do Caja Desktop do Linux, redesenhado com visual nostálgico em azul suave para telas de toque.
+      Projetos desenvolvidos com foco em simplicidade, leveza e alta produtividade. Baixe os instaladores APK oficiais diretamente no seu celular.
     </p>
 
-    <div class="cta-container">
-      <a href="caja-mobile.apk" class="btn-download-apk" download>
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-          <polyline points="7 10 12 15 17 10"></polyline>
-          <line x1="12" y1="15" x2="12" y2="3"></line>
-        </svg>
-        <span>Baixar Instalador APK</span>
-      </a>
-      <span class="download-meta">Pacote Direto: caja-mobile.apk • 4,4 MB • Android 7.0 ou superior</span>
-    </div>
+    <!-- Grade dos Aplicativos -->
+    <div class="apps-grid">
 
-    <!-- Painel de Recursos -->
-    <div class="app-preview-card">
-      <div class="preview-header">
-        <div class="preview-title">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="#2977bd">
-            <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
-          </svg>
-          <span>Recursos Integrados</span>
-        </div>
-        <span style="font-size: 12px; color: var(--text-muted);">Pronto para uso</span>
-      </div>
-
-      <div class="preview-body">
-        <div class="feature-item">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+      <!-- Card 1: Caja Mobile -->
+      <div class="app-card">
+        <div class="card-top">
+          <div class="app-icon">
+            <svg viewBox="0 0 24 24" fill="#2d7cbd">
+              <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+            </svg>
           </div>
-          <div class="feature-text">
-            <h3>Navegação Dinâmica</h3>
-            <p>Trilhas de navegação com toque rápido e botões clássicos de voltar, avançar e nível acima.</p>
+          <div class="app-headline">
+            <span class="app-tag">Gerenciador de Arquivos</span>
+            <span class="app-name">Caja Mobile</span>
           </div>
         </div>
 
-        <div class="feature-item">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-          </div>
-          <div class="feature-text">
-            <h3>Grade & Lista</h3>
-            <p>Alterne instantaneamente entre a visualização de ícones e a lista detalhada com tamanho e data.</p>
-          </div>
-        </div>
+        <div class="card-body">
+          <p class="app-desc">
+            Inspirado na interface clássica do Caja Desktop para Linux. Navegação por migalhas de pão, alternância entre grade e lista, operações de arquivos e visualizadores embutidos.
+          </p>
 
-        <div class="feature-item">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <div class="badges-list">
+            <span class="badge-item">Navegação Dinâmica</span>
+            <span class="badge-item">Grade & Lista</span>
+            <span class="badge-item">Visualizador de Mídia</span>
+            <span class="badge-item">Tema Azul Clarinho</span>
           </div>
-          <div class="feature-text">
-            <h3>Operações de Arquivos</h3>
-            <p>Copiar, recortar, colar, criar novas pastas e enviar arquivos reais do seu celular.</p>
-          </div>
-        </div>
 
-        <div class="feature-item">
-          <div class="feature-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-          </div>
-          <div class="feature-text">
-            <h3>Janela de Propriedades</h3>
-            <p>Inspecione o tamanho exato em bytes, caminhos completos e permissões do sistema.</p>
+          <div class="card-footer">
+            <a href="caja-mobile.apk" class="btn-download" download>
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Baixar Caja Mobile (.APK)</span>
+            </a>
+            <span class="file-meta-info">Versão 1.0.0 • 4,4 MB • Android 7.0+</span>
           </div>
         </div>
       </div>
+
+      <!-- Card 2: Bloco de Notas Pro -->
+      <div class="app-card">
+        <div class="card-top">
+          <div class="app-icon">
+            <svg viewBox="0 0 24 24" fill="#e08238">
+              <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+            </svg>
+          </div>
+          <div class="app-headline">
+            <span class="app-tag">Produtividade & Notas</span>
+            <span class="app-name">Bloco de Notas Pro</span>
+          </div>
+        </div>
+
+        <div class="card-body">
+          <p class="app-desc">
+            Aplicativo completo de anotações com personalização de fontes, cores vibrantes, caneta marca-texto, suporte a fotos da câmera ou galeria, GPS de localidade e backup.
+          </p>
+
+          <div class="badges-list">
+            <span class="badge-item">8 Famílias de Fontes</span>
+            <span class="badge-item">Cores & Destaques</span>
+            <span class="badge-item">Fotos & Câmera</span>
+            <span class="badge-item">Localização GPS</span>
+          </div>
+
+          <div class="card-footer">
+            <a href="bloco-de-notas-pro.apk" class="btn-download" download>
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2.5" fill="none">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Baixar Bloco de Notas Pro (.APK)</span>
+            </a>
+            <span class="file-meta-info">Versão 1.0.0 • 4,1 MB • Android 7.0+</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Guia de Instalacao -->
-    <div class="install-guide">
-      <h2>Como instalar no seu celular Android</h2>
-      <div class="install-steps">
-        <div class="step">
+    <!-- Guia de Instalacao no Celular -->
+    <div class="install-box">
+      <h2>Instruções Rápidas de Instalação</h2>
+      <div class="steps-container">
+        <div class="step-card">
           <span class="step-num">1</span>
-          <span>Toque no botão azul <strong>Baixar Instalador APK</strong> acima.</span>
+          <div class="step-text">
+            Toque no botão <strong>Baixar APK</strong> do aplicativo desejado acima.
+          </div>
         </div>
-        <div class="step">
+        <div class="step-card">
           <span class="step-num">2</span>
-          <span>Ao concluir o download, abra o arquivo <strong>caja-mobile.apk</strong> pelas notificações.</span>
+          <div class="step-text">
+            Abra o arquivo baixado pelas notificações do seu celular Android.
+          </div>
         </div>
-        <div class="step">
+        <div class="step-card">
           <span class="step-num">3</span>
-          <span>Se o Android perguntar, permita a instalação a partir do seu navegador e toque em <strong>Instalar</strong>.</span>
+          <div class="step-text">
+            Permita a instalação no navegador quando solicitado e toque em <strong>Instalar</strong>.
+          </div>
         </div>
       </div>
     </div>
   </main>
 
+  <!-- Rodape -->
   <footer>
-    <p>Projeto desenvolvido por <a href="https://github.com/CalangoHub" target="_blank" rel="noopener">CalangoHub</a></p>
-    <p style="margin-top: 4px; font-size: 11px;">Código aberto sob licença MIT</p>
+    <p>Vitrine mantida por <a href="https://github.com/CalangoHub" target="_blank" rel="noopener">CalangoHub</a></p>
+    <p style="margin-top: 6px; font-size: 11px;">Aplicativos livres de código aberto</p>
   </footer>
 
 </body>
