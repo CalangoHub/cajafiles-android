@@ -1,0 +1,6 @@
+{
+  "appId": "com.calango.cajamobile",
+  "appName": "Caja Mobile",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
